@@ -23,6 +23,11 @@ public class Book {
     public Book() {
 
     }
+    public Book(String title, int column, int row){
+        this.title = title;
+        this.col = column;
+        this.row = row;
+    }
 
     public void setAuthor(String author) {
         this.author = author;
@@ -55,6 +60,12 @@ public class Book {
     }
 
     public int[] getCell(){return new int[]{row,col};}
+
+    public int getCol(){
+        return col;}
+    public int getRow(){
+        return row;}
+
 
 
 

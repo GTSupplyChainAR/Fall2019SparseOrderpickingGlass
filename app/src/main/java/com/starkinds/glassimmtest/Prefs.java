@@ -7,5 +7,5 @@ package com.starkinds.glassimmtest;
 public class Prefs {
     public static int SCREEN_WIDTH, SCREEN_HEIGHT;
     public static int MAP_WIDTH = 30, MAP_HEIGHT = 60;
-    public static int VERTICAL_HEIGHT = 6;
+    public static int VERTICAL_HEIGHT = 5;
 }

@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class VerticalShelfView extends LinearLayout {
     private static final String TAG = "|VerticalShelfView|";
 
@@ -20,6 +22,18 @@ public class VerticalShelfView extends LinearLayout {
 
     private int MP = ViewGroup.LayoutParams.MATCH_PARENT;
     private int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
+    private ArrayList<Book> bookList = new ArrayList<Book>();
+    private Book book0 = new Book("Guide to Data Analysis",2,1);
+    private Book book1 = new Book("The Art of Manipulating Fabric",3,5);
+    private Book book2 = new Book("Capacitive Sensors",3,1);
+    private Book book3 = new Book("Computers",3,5);
+    private Book book4 = new Book("Intro to Electric Circuit Analysis",2,3);
+    private Book book5 = new Book("America Again", 1, 2);
+    private Book book6 = new Book("Fun Home", 2, 4);
+    private Book book7 = new Book("Colorless Tsukuru...", 2, 5);
+    private Book book8 = new Book("Ubiquitous Computing...", 3, 3);
+    private Book book9 = new Book("Location and Context...", 1, 2);
+
 
     // CONSTRUCTOR
     public VerticalShelfView(Context context) {
@@ -29,6 +43,16 @@ public class VerticalShelfView extends LinearLayout {
     }
 
     public void init(){
+        bookList.add(book0);
+        bookList.add(book1);
+        bookList.add(book2);
+        bookList.add(book3);
+        bookList.add(book4);
+        bookList.add(book5);
+        bookList.add(book6);
+        bookList.add(book7);
+        bookList.add(book8);
+        bookList.add(book9);
         this.setLayoutParams(new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
@@ -45,13 +69,15 @@ public class VerticalShelfView extends LinearLayout {
         author_view = new TextView(context);
         author_view.setLayoutParams(new LayoutParams(WC, WC));
         applyTextStyle(author_view);
-        author_view.setText("Author");
+        author_view.setText(bookList.get(0).getTitle());
         book_info_layout.addView(author_view);
 
         title_view = new TextView(context);
         title_view.setLayoutParams(new LayoutParams(WC, WC));
         applyTextStyle(title_view);
-        title_view.setText("Book Title");
+        String col = Integer.toString(bookList.get(0).getCol());
+        col = "Col: " + col;
+        title_view.setText(col);
         book_info_layout.addView(title_view);
 
         LinearLayout vertical_rack_layout = new LinearLayout(context);
@@ -76,8 +102,11 @@ public class VerticalShelfView extends LinearLayout {
             int margins = 15;
             lpi.setMargins(margins, margins, margins, margins);
             shelf.setLayoutParams(lpi);
-
-            shelf.setBackgroundColor(Color.RED);
+            if(i==bookList.get(0).getRow()-1){
+                shelf.setBackgroundColor(Color.GREEN);
+            }
+            else
+                shelf.setBackgroundColor(Color.RED);
             shelves[i] = shelf;
             vertical_rack_layout.addView(shelf);
         }
@@ -123,5 +152,17 @@ public class VerticalShelfView extends LinearLayout {
         rackIndex ++;
         columnTag.setText(rackIndex+"");
         //title_view.setText(tag);
+    }
+
+    public void nextBook(int currentBook){
+        author_view.setText(bookList.get(currentBook).getTitle());
+        String col = Integer.toString(bookList.get(currentBook).getCol());
+        col = "Col: " + col;
+        title_view.setText(col);
+        int location = bookList.get(currentBook).getRow();
+        columnTag.setText(Integer.toString(location));
+        for(ImageView shelf : shelves)
+            shelf.setBackgroundColor(Color.RED);
+        shelves[location-1].setBackgroundColor(Color.GREEN);
     }
 }

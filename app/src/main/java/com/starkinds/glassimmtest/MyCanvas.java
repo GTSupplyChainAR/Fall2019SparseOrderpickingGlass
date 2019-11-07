@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.Log;
 import android.view.View;
 
 import static java.lang.Math.PI;
@@ -31,7 +32,9 @@ public class MyCanvas extends View {
         super(context);
         this.context = context;
         setFocusable(true);
-        mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.map_realistic);
+        //mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.map_with_path_glass);
+        //mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b0);
+        mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b0);
         mCursor = BitmapFactory.decodeResource(getResources(), R.drawable.cursor);
         xTouch = x;
         yTouch = y;
@@ -58,12 +61,12 @@ public class MyCanvas extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawBitmap(mBackground, 0, 0, null);
+        //canvas.drawBitmap(mBackground, 0, 0, null);
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
-        canvas.drawBitmap(mBackground, 0, 0, null);
+
 /*
         Paint p = new Paint();
         p.setAntiAlias(true);
@@ -100,19 +103,28 @@ public class MyCanvas extends View {
         float tmpX = mCursor.getWidth()/2;
         float tmpY = mCursor.getHeight() / 2;
         //Log.d(TAG, "tmpXY: " + tmpX + ", " + tmpY);
-        rotate.postTranslate(-tmpX, -tmpY);
-        rotate.postRotate(currentDegree);
-        rotate.postTranslate(xTouch, yTouch);
+        //rotate.postTranslate(-tmpX, -tmpY);
+        //rotate.postRotate(currentDegree);
+        //rotate.postTranslate(xTouch, yTouch);
 
         //Matrix combine = new Matrix();
         //combine.postConcat(rotate);
         //combine.postConcat(translate);
 
 
+        rotate.postTranslate(-xTouch, -yTouch);
+        rotate.postRotate(-currentDegree);
+        rotate.postTranslate(300, 150);
+        //rotate.postRotate(-currentDegree);
+
         //Log.d(TAG, "CurrentDegree: " + currentDegree);
         //canvas.drawBitmap(mCursor, matrix, null);
         //matrix.setRotate(currentDegree,mCursor.getWidth()/2,mCursor.getHeight()/2);
-        canvas.drawBitmap(mCursor, rotate, null);
+        //canvas.drawBitmap(mBackground, 300-xTouch, 150-yTouch, null);
+        canvas.drawBitmap(mBackground,rotate,null);
+        canvas.drawBitmap(mCursor, 300-tmpX,150-tmpY, null);
+
+        Log.d(TAG, "xTouch: " + xTouch + ", yTouch: " + yTouch);
         //drawArrow(p,canvas,100,100,200,200);
 
     }
@@ -142,5 +154,52 @@ public class MyCanvas extends View {
         path.close();
 
         canvas.drawPath(path, paint);
+    }
+
+    public void nextPickingPath(int currentBook){
+        switch (currentBook){
+            case 0:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b0);
+                invalidate();
+                break;
+            case 1:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b1);
+                invalidate();
+                break;
+            case 2:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b2);
+                invalidate();
+                break;
+            case 3:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b3);
+                invalidate();
+                break;
+            case 4:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b4);
+                invalidate();
+                break;
+            case 5:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b5);
+                invalidate();
+                break;
+            case 6:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b6);
+                invalidate();
+                break;
+            case 7:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b7);
+                invalidate();
+                break;
+            case 8:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b8);
+                invalidate();
+                break;
+            case 9:
+                mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.p1b9);
+                invalidate();
+                break;
+        }
+
+
     }
 }

@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.touchpad.GestureDetector;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -48,6 +49,7 @@ public class MainActivity extends Activity implements SensorEventListener, View.
     private GestureDetector mGestureDetector;
     private boolean emulator = false;
     private VerticalShelfView vsView;
+    private int currentBook;
 
     // Create a BroadcastReceiver for ACTION_FOUND
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -196,6 +198,7 @@ public class MainActivity extends Activity implements SensorEventListener, View.
         mGestureDetector = createGestureDetector(this);
         map.setOnTouchListener(this);
         vsView = new VerticalShelfView(this);
+        currentBook=0;
         //vsView.setVisibility(View.GONE);
         //setContentView(vsView);
 
@@ -282,6 +285,21 @@ public class MainActivity extends Activity implements SensorEventListener, View.
                     vsView.setVisibility(View.VISIBLE);
                     setContentView(vsView);
                     map.setVisibility(View.GONE);
+                    return true;
+                }else if (gesture==Gesture.TAP){
+                    Log.d(TAG,"Taped");
+                    currentBook++;
+                    vsView.nextBook(currentBook);
+                    map.nextPickingPath(currentBook);
+                    String message = Integer.toString(currentBook);
+                    try {
+                        byte[] bytes = message.getBytes(Charset.defaultCharset());
+                        mBluetoothConnection.write(bytes);
+                        return true;
+                    }catch (Exception e){
+                        Log.e(TAG, "write error");
+                    }
+                    //mBluetoothConnection.write();
                     return true;
                 }
 
