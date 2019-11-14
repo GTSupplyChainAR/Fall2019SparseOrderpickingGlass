@@ -23,16 +23,16 @@ public class VerticalShelfView extends LinearLayout {
     private int MP = ViewGroup.LayoutParams.MATCH_PARENT;
     private int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
     private ArrayList<Book> bookList = new ArrayList<Book>();
-    private Book book0 = new Book("Guide to Data Analysis",2,1);
-    private Book book1 = new Book("The Art of Manipulating Fabric",3,5);
-    private Book book2 = new Book("Capacitive Sensors",3,1);
-    private Book book3 = new Book("Computers",3,5);
-    private Book book4 = new Book("Intro to Electric Circuit Analysis",2,3);
-    private Book book5 = new Book("America Again", 1, 2);
-    private Book book6 = new Book("Fun Home", 2, 4);
-    private Book book7 = new Book("Colorless Tsukuru...", 2, 5);
-    private Book book8 = new Book("Ubiquitous Computing...", 3, 3);
-    private Book book9 = new Book("Location and Context...", 1, 2);
+    private Book book0 = new Book("The Complete Persepolis",3,5);
+    private Book book1 = new Book("Practical Digital ...",2,3);
+    private Book book2 = new Book("Public Enemies",3,5);
+    private Book book3 = new Book("Cognitive Science",3,4);
+    private Book book4 = new Book("Pegasus in Space",3,1);
+    private Book book5 = new Book("Rise & Resurrection ...", 1, 1);
+    private Book book6 = new Book("Discrete-Time Signal...", 3,1);
+    private Book book7 = new Book("Statistics for Experimenters", 3,2);
+    private Book book8 = new Book("Conqueror’s Legacy", 2,5);
+    private Book book9 = new Book("Selected Reprints On ...", 1, 2);
 
 
     // CONSTRUCTOR
